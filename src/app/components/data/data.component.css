@@ -1,0 +1,7 @@
+.has-danger.ng-touched:not(form){
+       border: 1px solid red;
+}
+
+.top{
+       margin-top: 2px;
+}

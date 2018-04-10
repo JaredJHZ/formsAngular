@@ -1,0 +1,88 @@
+<h3>Data form</h3>
+<form [formGroup]="forma" (ngSubmit)="guardarCambios()" novalidate >
+  <div formGroupName="nombreCompleto">
+      <div class="form-group" [ngClass]="{'has-danger':!forma.get('nombreCompleto').valid}">
+          <label for="">
+            Nombre
+          </label>
+          <input type="text"
+          class="form-control"
+          placeholder="Nombre"
+          formControlName='nombre'
+          >
+          <div style="color:red;" *ngIf="forma.controls['nombreCompleto'].controls['nombre'].errors?.required">
+            El nombre es necesario
+          </div>
+          <div style="color:red;" *ngIf="forma.controls['nombreCompleto'].controls['nombre'].errors?.minlength">
+            Por lo menos 3 caracteres
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Apellido</label>
+          <input type="text"
+          class="form-control"
+          placeholder="Apellido"
+          formControlName='apellido'
+          >
+        </div>
+  </div>
+  <div class="form-group">
+    <label for="">Correo</label>
+    <input type="text"
+    class="form-control"
+    placeholder="Correo"
+    formControlName='correo'
+    >
+  </div>
+  <div class="form-group">
+    <label for="">Username</label>
+    <input type="text"
+    class="form-control"
+    placeholder="username"
+    formControlName="username"
+    >
+  </div>
+  <div class="form-group">
+    <label for="">Password</label>
+    <input type="text"
+    class="form-control"
+    placeholder="password"
+    >
+  </div>
+<div class="form-group">
+  <label for="">Repeat password</label>
+  <input type="text"
+  class="form-control"
+  placeholder="password"
+  >
+</div>
+
+  <label>Pasatiempos</label>
+
+  <div class="form-group">
+    <div class="row">
+        <div class="col-md-12"  formArrayName="pasatiempos"  *ngFor="let pasatiempo of forma.controls['pasatiempos'].controls; let i = index" >   
+            <input 
+              class="form-control"
+              [formControlName]="i"
+              type="text" >    
+            <button class="btn btn-danger top" (click)="borrarPasatiempo(i)">x</button>
+        </div>
+    </div>
+        <button
+          class="btn btn-primary btn-sm top"
+          (click)="agregarPasatiempo()"
+          type="button"
+        >   
+        Agregar
+    </button> 
+  </div>
+
+
+  <button class="btn btn-primary" [disabled]="!forma.valid" >
+    Submit
+  </button>
+  {{forma.valid}}
+  {{forma.status}}
+  
+</form>
